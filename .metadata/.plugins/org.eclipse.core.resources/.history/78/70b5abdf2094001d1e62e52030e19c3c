@@ -1,0 +1,64 @@
+package gst.Verification_API;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+//import org.springframework.http.HttpStatus;
+
+import org.apache.http.HttpStatus;
+
+/**
+ * Hello world!
+ *
+ */
+public class App {
+
+	public static String hitBd(String url, String jws) {
+		try {
+			System.out.println(System.currentTimeMillis() + "");
+			URL obj = new URL(url);
+			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+			con.setRequestMethod("POST");
+			con.setRequestProperty("BD-Timestamp", System.currentTimeMillis() + "");
+			con.setRequestProperty("BD-Traceid", System.currentTimeMillis() + "");
+			con.setRequestProperty("Accept", "application/jose");
+			con.setRequestProperty("Content-Type", "application/jose");
+			// con.setRequestProperty( "Authorization", "Bearer " + jws );
+			con.setDoOutput(true);
+			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+			wr.writeBytes(jws);
+			wr.flush();
+			wr.close();
+			int responseCode = con.getResponseCode();
+			BufferedReader resIn;
+			BufferedReader errorIn;
+			String inputLine;
+			StringBuffer response = new StringBuffer();
+			if (responseCode != HttpStatus.SC_OK) {
+				errorIn = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+				while ((inputLine = errorIn.readLine()) != null) {
+					response.append(inputLine);
+				}
+				errorIn.close();
+			} else {
+				resIn = new BufferedReader(new InputStreamReader(con.getInputStream()));
+				while ((inputLine = resIn.readLine()) != null) {
+					response.append(inputLine);
+				}
+				resIn.close();
+			}
+			System.out.println(con.getHeaderFields());
+			System.out.println(" #@123#@ " + response.toString());
+			return response.toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public static void main(String[] args) {
+		System.out.println("Hello World!");
+	}
+}

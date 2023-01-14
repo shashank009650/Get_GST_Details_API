@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.net.URL"/>
+    <fullyQualifiedTypeName name="java.lang.StringBuffer"/>
+    <fullyQualifiedTypeName name="org.apache.http.HttpStatus"/>
+    <fullyQualifiedTypeName name="gst.Verification_API.Helper"/>
+    <fullyQualifiedTypeName name="java.lang.reflect.Array"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="gst.Verification_API.Client"/>
+    <fullyQualifiedTypeName name="org.jose4j.json.internal.json_simple.JSONObject"/>
+    <fullyQualifiedTypeName name="com.amazonaws.util.json.JSONObject"/>
+</qualifiedTypeNameHistroy>
